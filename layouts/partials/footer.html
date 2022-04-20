@@ -1,0 +1,49 @@
+<footer>
+  <div class="container">
+    <div class="section">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-xl-6 col-lg-8 col-md-10">
+          {{ with site.Params.subscription }}
+          {{ if .enable }}
+          <div class="newsletter-block">
+            <h2 class="section-title text-center mb-4">{{ .title | markdownify }}</h2>
+            <div id="mc_embed_signup">
+              <form action="{{ .mailchimp_form_action }}" method="post"  id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <div id="mc_embed_signup_scroll" class="input-group flex-column flex-sm-row flex-nowrap flex-sm-nowrap">
+                  <input type="email" value="" name="EMAIL" class="form-control required email w-auto text-center text-sm-start" id="mce-EMAIL" placeholder="{{ .input_placeholder }}" aria-label="Subscription" autocomplete="new-email" required>
+                  <div id="mce-responses" class="clear">
+                    <div class="response" id="mce-error-response" style="display:none"></div>
+                    <div class="response" id="mce-success-response" style="display:none"></div>
+                  </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="{{.mailchimp_form_name}}" tabindex="-1" value=""></div>
+                  <div class="input-group-append d-flex d-sm-inline-block mt-2 mt-sm-0 ms-0 w-auto">
+                    <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="input-group-text w-100 justify-content-center" aria-label="Subscription Button"><i class="ti ti-user-plus me-2"></i>  {{.button_label | markdownify}}</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    <div class="pb-5">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6 text-center text-lg-start">
+          {{ with site.Params.copyright }}
+          <p class="mb-0 copyright-text content">&copy;<script>document.write(new Date().getFullYear())</script> {{.| markdownify}}</p>
+          {{ end }}
+        </div>
+        <div class="col-lg-6 text-center text-lg-end">
+          <ul class="list-inline footer-menu">
+            {{ range site.Menus.footer }}
+            <li class="list-inline-item m-0"><a href="{{.URL | absURL}}">{{.Name}}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

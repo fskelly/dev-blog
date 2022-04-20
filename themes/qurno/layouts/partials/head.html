@@ -1,0 +1,45 @@
+<head>
+  <meta charset="utf-8">
+  {{ hugo.Generator }}
+  <title>{{.Title | default site.Title}}</title>
+
+  <meta name="author" content="{{ site.Params.author }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="description" content="{{ with .Params.description }} {{.}} {{else}} {{ with site.Params.description }} {{.}} {{end}} {{end}}">
+
+  <!-- favicon -->
+  {{ $favicon:= site.Params.favicon }}
+  {{ if $favicon }}
+  {{ if fileExists (add `assets/` $favicon) }}
+  {{ $favicon:= resources.Get $favicon }}
+  {{ $favicon_16:= $favicon.Resize "16x png"}}
+  {{ $favicon_32:= $favicon.Resize "32x png"}}
+  {{ $favicon_96:= $favicon.Resize "96x png"}}
+  {{ $favicon_180:= $favicon.Resize "180x png"}}
+  <link rel="shortcut icon" href="{{$favicon_32.RelPermalink}}" type="image/x-icon">
+  <link rel="icon" href="{{$favicon_32.RelPermalink}}" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{$favicon_16.RelPermalink}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{$favicon_32.RelPermalink}}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{$favicon_96.RelPermalink}}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{$favicon_180.RelPermalink}}">
+  {{ end }}
+  {{ end }}
+
+  {{ if site.GoogleAnalytics }}
+  {{ template "_internal/google_analytics.html" . }}
+  {{ end }}
+
+  {{ "<!-- CSS Plugins and Fonts -->" | safeHTML}}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  {{ $styles := slice }}
+  {{ range site.Params.plugins.css }}
+  {{ if findRE "^http" .link }}
+  <link rel="stylesheet" href="{{ .link | absURL }}">
+  {{ else }}
+  {{ $styles = $styles | append (resources.Get .link) }}
+  {{ end }}
+  {{ end }}
+  {{ $styles := $styles | append (resources.Get "scss/style.scss" | resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify) }}
+  {{ $styles := $styles | resources.Concat "css/style.css" | minify | fingerprint "sha512" }}
+  <style type="text/css">{{$styles.Content | safeCSS}}</style>
+</head>

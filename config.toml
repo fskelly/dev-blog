@@ -1,0 +1,114 @@
+######################## default configuration ####################
+baseURL = "https://www.fskelly.com/"
+title = "Fletcher Kelly - Cloud, Home automation and technology"
+theme = "qurno"
+# post pagination
+paginate = "6"
+# post excerpt
+summaryLength = "20"
+# google analytics
+googleAnalytics = "" # check the hugo documentation for more info on this - https://gohugo.io/templates/internal/#google-analytics
+# disqus short name
+DisqusShortname = "platol" # get your shortname form here : https://disqus.com
+
+############################# Image Processing ##############################
+[imaging]
+quality = "100"
+
+############################# Markup ##############################
+[markup.highlight]
+  style = 'colorful'
+
+############################# Outputs ##############################
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[markup.goldmark.renderer]
+unsafe= true
+
+############################## Plugins ##############################
+# CSS Plugins
+[[params.plugins.css]]
+link = "plugins/bootstrap/bootstrap.min.css"
+[[params.plugins.css]]
+link = "plugins/tabler-icons/tabler-icons.min.css"
+[[params.plugins.css]]
+link = "https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600&family=Crete+Round&display=swap"
+
+# JS Plugins
+[[params.plugins.js]]
+link = "plugins/bootstrap/bootstrap.min.js"
+[[params.plugins.js]]
+link = "plugins/lightense/lightense.min.js"
+
+#################### Default Parameters ################################
+[params]
+logo = "images/logo.png"
+logo_width = "110px"
+favicon = "images/favicon.png"
+# Meta data
+description = "Minimal Blog Theme for HUGO Static Site Generator"
+author = "Platol"
+# search
+search = true
+# main section
+mainSections = ["blog"]
+# contact form action
+contact_form_action = "#" # contact form works with https://formspree.io
+# copyright
+copyright = "Fletcher Kelly 2016-Present." # ©2022(year will generate autometically) Qurno. All rights reserved.
+
+# Subscription
+[params.subscription]
+enable = false
+# mailchimp subsciption
+mailchimp_form_action = "https://gmail.us20.list-manage.com/subscribe/post?u=92641572a6c6ec43da15feed0&amp;id=d28bb2454f" # replace this url with yours
+mailchimp_form_name = "b_92641572a6c6ec43da15feed0_d28bb2454f" # replace this code with yours
+title = "Get latest posts delivered right to your inbox"
+input_placeholder = "Your email address"
+button_label = "Join today"
+
+# Contact Form
+[params.contact_form]
+enable = false
+contact_form_action = "https://airform.io/platoltheme@gmail.com"
+# replace the `contact_form_action` url with yours
+# you can use formspree, sheetmonkey etc etc
+
+
+# Main Menu
+[[menu.main]]
+name = "Home"
+url = ""
+weight = 1
+  
+[[menu.main]]
+name = "About"
+url = "about/"
+weight = 2
+  
+[[menu.main]]
+name = "Elements"
+url = "elements/"
+weight = 5
+  
+[[menu.main]]
+name = "Archive"
+url = "blog/archive/"
+weight = 8
+  
+[[menu.main]]
+name = "Contact"
+url = "contact/"
+weight = 9
+
+# Footer Menu
+[[menu.footer]]
+name = "Privacy Policy"
+url = "privacy/"
+weight = 3
+
+[[menu.footer]]
+name = "404 Page"
+url = "404-page/"
+weight = 4
